@@ -30,15 +30,6 @@ output = json
 
 Write-Host "Arquivos de perfil AWS criados em $awsDir."
 
-# Iniciar o Docker se necessário
-if ((Get-Service -Name "com.docker.service" -ErrorAction SilentlyContinue).Status -ne 'Running') {
-    Write-Host "Iniciando o serviço Docker..."
-    Start-Service -Name "com.docker.service"
-    Start-Sleep -Seconds 10
-} else {
-    Write-Host "Docker já está em execução."
-}
-
 # Verificar se o LocalStack container está rodando
 $localstackRunning = docker ps --filter "name=localstack_main" --format "{{.Names}}"
 
